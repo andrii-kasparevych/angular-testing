@@ -2,26 +2,26 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
 
-## Development server
+This is a sample project to play around with test frameworks available.
+It is recommended to run the tests in a Docker container to simulate the CI environment, e.g. 
+```powershell
+# Run karma-compatible container
+docker run --rm -it -v ${PWD}:/app trion/ng-cli-karma:17.1.3 bash
+# install all packages (might be needed if previously installed on Windows)
+npm ci
+# run tests
+npm run test-ci
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+# Run Node container for Jest tests
+docker run --rm -it -v ${PWD}:/code node:18.19-buster bash
+cd code
+npm ci
+npm run test-jest
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+There are 3 options I tried here:
+* Karma (`npm run test`)
+* jest (`npm run test-jest`)
+* jest with ESM (`npm run test-esm`) - this also uses `esbuild-jest` as transformer instead of `ts-jest`, see `jest.config.mjs` file
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
